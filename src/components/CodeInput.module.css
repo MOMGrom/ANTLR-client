@@ -1,0 +1,51 @@
+body {
+    background: #282c34; /* Темный фон страницы */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #282c34; /* Темный фон страницы */
+    color: #ffffff;
+    font-family: 'Source Code Pro', Courier, monospace; /* Современный шрифт для кода */
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #61dafb; /* Яркий акцентный цвет */
+  }
+  
+  .editor {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #1e1e1e; /* Темный фон для текстовой области */
+    color: #dcdcdc; /* Светлый цвет текста */
+    border: 1px solid #3b3b3b; /* Легкая граница */
+  }
+  
+  .button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #282c34; /* Темный текст */
+    background-color: #61dafb; /* Яркий акцентный цвет */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #21a1f1; /* Тот же цвет для hover, но более яркий */
+    transform: scale(1.05); /* Легкая анимация увеличения при наведении */
+  }
+  
