@@ -7,6 +7,7 @@ function Graph(props) {
     return (
         <div>
             {graph}
+            б
         </div>
     )
 }
