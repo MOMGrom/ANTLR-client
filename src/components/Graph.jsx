@@ -65,7 +65,7 @@ const Graph = () => {
    
     data.nodes.forEach((node, i) => {
       node.fx = 0; 
-      node.fy = i * 30; 
+      node.fy = i * 100; 
     });
 
     fg.d3Force('link').distance(20); 
@@ -73,11 +73,12 @@ const Graph = () => {
   }, []);
 
   return (
+    <div>
     <ForceGraph2D
       ref={fgRef}
       graphData={data}
       linkDirectionalArrowLength={10}
-      linkDirectionalArrowRelPos={2}
+      linkDirectionalArrowRelPos={0.76}
       linkCurvature={link => {
         const sourceIndex = parseInt(link.source.id);
         const targetIndex = parseInt(link.target.id);
@@ -87,10 +88,10 @@ const Graph = () => {
       linkDirectionalArrowColor={() => 'white'}
       nodeCanvasObject={(node, ctx, globalScale) => {
         const label = node.title;
-        const fontSize = 8 / globalScale;
+        const fontSize = 16 / globalScale;
 
         ctx.beginPath();
-        ctx.arc(node.x, node.y, 15 / globalScale, 0, 2 * Math.PI, false);
+        ctx.arc(node.x, node.y, 35 / globalScale, 0, 2 * Math.PI, false);
         ctx.fillStyle = 'lightblue';
         ctx.fill();
 
@@ -111,7 +112,10 @@ const Graph = () => {
         ctx.fillStyle = 'transparent'; 
         ctx.fillText(node.title, node.x, node.y);
       }}
+      enableNodeDrag={false} 
+      enableZoomPanInteraction={true}
     />
+    </div>
   );
 };
 
