@@ -25,7 +25,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ Code: {code} })
+      body: JSON.stringify({ Code: code })
     });
 
     console.log((await result).body);
