@@ -21,6 +21,7 @@ function App() {
   async function getGraph(code) {
     let result = fetch("http://localhost:5113/api/graph", {
       method: "POST",
+      mode: "cors",
       headers: {
         
       },
@@ -32,8 +33,7 @@ function App() {
     console.log((await result).body);
   }
   
-  function AnlzBtnClick(event, code) {
-    event.preventDefault();
+  function AnlzBtnClick(code) {
     getGraph(code);
   }
 

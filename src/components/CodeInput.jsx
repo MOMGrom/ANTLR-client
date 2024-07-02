@@ -4,12 +4,17 @@ import 'ace-builds/src-noconflict/mode-c_cpp'; // Поддержка языка 
 import 'ace-builds/src-noconflict/theme-monokai'; // Тема редактора
 import styles from './CodeInput.module.css';
 
-const CodeInput = () => {
+const CodeInput = (props) => {
   const [code, setCode] = useState('');
 
   const handleChange = (newCode) => {
     setCode(newCode);
   };
+
+  function handleClick(event) {
+    event.preventDefault();
+    props.AnlzBtnClick(code);
+  }
 
   return (
     <div className={styles.container}>
@@ -31,7 +36,7 @@ const CodeInput = () => {
         height="700px"  
         width="1200px"
       />
-      <button className={styles.button}>Анализировать</button>
+      <button className={styles.button} onClick={handleClick}>Анализировать</button>
     </div>
   );
 };
