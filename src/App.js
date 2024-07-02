@@ -23,11 +23,9 @@ function App() {
       method: "POST",
       mode: "cors",
       headers: {
-        
+        'Content-Type': 'application/json'
       },
-      body: {
-        code: multyToSingleLine(code),
-      }
+      body: JSON.stringify({ Code: {code} })
     });
 
     console.log((await result).body);
@@ -39,10 +37,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* <CodeInput AnlzBtnClick={AnlzBtnClick}/>
+      <CodeInput AnlzBtnClick={AnlzBtnClick}/>
       {graph ? <Graph Graph={graph}/> : <></>}
-      {matrix ? <Matrix Matrix={matrix}/> : <></>} */}
+      {/* 
       <Graph/>
+      {matrix ? <Matrix Matrix={matrix}/> : <></>} */}
     </div>
   );
 }
