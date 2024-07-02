@@ -39,9 +39,10 @@ function App() {
 
   return (
     <div className="App">
-      <CodeInput AnlzBtnClick={AnlzBtnClick}/>
+      {/* <CodeInput AnlzBtnClick={AnlzBtnClick}/>
       {graph ? <Graph Graph={graph}/> : <></>}
-      {matrix ? <Matrix Matrix={matrix}/> : <></>}
+      {matrix ? <Matrix Matrix={matrix}/> : <></>} */}
+      <Graph/>
     </div>
   );
 }
