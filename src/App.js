@@ -19,7 +19,7 @@ function App() {
   }
   
   async function getGraph(code) {
-    let result = fetch("http://localhost:5113/api/graph", {
+    let result = await fetch("http://localhost:5113/api/graph", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -28,11 +28,16 @@ function App() {
       body: JSON.stringify({ Code: code })
     });
 
-    console.log((await result).body);
+    if (result.ok) {
+      return await result.json();
+    } else {
+      console.log("faild to fetch graph");
+      return null;
+    }
   }
   
-  function AnlzBtnClick(code) {
-    getGraph(code);
+  async function AnlzBtnClick(code) {
+    setGraph(await getGraph(code));
   }
 
   return (
