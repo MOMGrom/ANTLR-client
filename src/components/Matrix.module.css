@@ -1,31 +1,66 @@
 .main {
-    margin-top: 100px;
-    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2e2e2e;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .title {
-    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .matrixArea {
-
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 2px;
 }
 
 .matrixString {
-
+    display: contents;
 }
 
 .matrixUnit {
-    display: inline-block;
-
-    color: white;
-
-    padding: auto;
-
     width: 40px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #444;
+    transition: background-color 0.3s ease;
+}
 
-    border-style: solid;
-    border-width: 2px;
-    border-color: rgb(50, 145, 174);
+.matrixUnit[data-value='1'] {
+    background-color: #8877F5;
+}
+
+.matrixUnit[data-value='0'] {
+    background-color: #FDE3FE;
+}
+
+.rowNumber, .colNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #444;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+.rowNumber {
+    grid-column: 1;
+}
+
+.colNumber {
+    grid-row: 1;
 }
