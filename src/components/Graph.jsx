@@ -78,6 +78,7 @@ const Graph = (props) => {
         nodesDraggable={true}
       >
         <Controls style={{ color: '#FFF' }} />
+        
       </ReactFlow>
     </div>
   );
