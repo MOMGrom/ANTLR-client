@@ -1,77 +1,84 @@
-import React, { useEffect, useRef } from 'react';
-import ForceGraph2D from 'react-force-graph-2d';
+import React, { useMemo } from 'react';
+import ReactFlow, { Controls, Background, MiniMap, Handle } from 'reactflow';
+import 'reactflow/dist/style.css';
+import dagre from 'dagre';
+
+// Функция для автоматического размещения узлов с помощью dagre
+const getLayoutedElements = (nodes, edges) => {
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+  dagreGraph.setGraph({ rankdir: 'TB' });
+
+  nodes.forEach((node) => {
+    dagreGraph.setNode(node.id, { width: 172, height: 36 });
+  });
+
+  edges.forEach((edge) => {
+    dagreGraph.setEdge(edge.source, edge.target);
+  });
+
+  dagre.layout(dagreGraph);
+
+  nodes.forEach((node) => {
+    const nodeWithPosition = dagreGraph.node(node.id);
+    node.targetPosition = 'top';
+    node.sourcePosition = 'bottom';
+    node.position = {
+      x: nodeWithPosition.x - 86,
+      y: nodeWithPosition.y - 18,
+    };
+  });
+
+  return { nodes, edges };
+};
+
+const nodeStyles = {
+  background: '#0066ff',
+  color: '#FFF',
+  border: '1px solid #4A5568',
+  padding: 10,
+  borderRadius: 5,
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+};
+
+const edgeStyles = {
+  stroke: '#FFF',
+  strokeWidth: 2,
+};
 
 const Graph = (props) => {
-  const fgRef = useRef();
+  const nodes = props.Graph.Nodes.map((node) => ({
+    id: node.Id.toString(),
+    data: { label: node.Id },
+    position: { x: 0, y: 0 },
+    style: nodeStyles,
+  }));
 
-  let GraphData = {
-    nodes: [],
-    links: [],
-  };
+  const edges = props.Graph.Edges.map((edge) => ({
+    id: `${edge.sourceId}-${edge.targetId}`,
+    source: edge.sourceId.toString(),
+    target: edge.targetId.toString(),
+    animated: true,
+    markerEnd: { type: 'arrowclosed', color: '#FFF' },
+    style: edgeStyles,
+  }));
 
-  props.Graph.Nodes.forEach((node, index) => {
-    GraphData.nodes.push({id: node.Id, title: node.Id, fx: 0, fy: 100 * index});
-  });
-
-  props.Graph.Edges.forEach((edge, index) => {
-    GraphData.links.push({source: edge.sourceId, target: edge.targetId});
-  });
-
-  useEffect(() => {
-    const fg = fgRef.current;
-
-    // data.nodes.forEach((node, i) => {
-    //   node.fx = 0; 
-    //   node.fy = i * 100; 
-    // });
-
-    fg.d3Force('link').distance(20); 
-    fg.d3Force('charge').strength(-200); 
-  }, []);
+  const { nodes: layoutedNodes, edges: layoutedEdges } = useMemo(
+    () => getLayoutedElements(nodes, edges),
+    [nodes, edges]
+  );
 
   return (
-    <div>
-    <ForceGraph2D
-      ref={fgRef}
-      graphData={GraphData}
-      linkDirectionalArrowLength={10}
-      linkDirectionalArrowRelPos={0.76}
-      linkCurvature={link => {
-        const sourceIndex = parseInt(link.source.id);
-        const targetIndex = parseInt(link.target.id);
-        return Math.abs(sourceIndex - targetIndex) === 1 ? 0 : 0.5;
-      }}
-      linkColor={() => 'white'}
-      linkDirectionalArrowColor={() => 'white'}
-      nodeCanvasObject={(node, ctx, globalScale) => {
-        const label = node.title;
-        const fontSize = 16 / globalScale;
-
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, 35 / globalScale, 0, 2 * Math.PI, false);
-        ctx.fillStyle = 'lightblue';
-        ctx.fill();
-
-        ctx.font = `${fontSize}px Sans-Serif`;
-        ctx.fillStyle = 'black';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(label, node.x, node.y);
-      }}
-      nodePointerAreaPaint={(node, color, ctx, globalScale) => {
-        const fontSize = 64 / globalScale;
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, 15 / globalScale, 0, 2 * Math.PI, false);
-        ctx.fillStyle = color;
-        ctx.fill();
-
-        ctx.font = `${fontSize}px Sans-Serif`;
-        ctx.fillStyle = 'transparent'; 
-        ctx.fillText(node.title, node.x, node.y);
-      }}
-      enableNodeDrag={true} 
-      enableZoomPanInteraction={true}
-    />
+    <div style={{ width: '100%', height: '100vh', backgroundColor: '#282c34' }}>
+      <ReactFlow
+        nodes={layoutedNodes}
+        edges={layoutedEdges}
+        fitView
+        nodesConnectable={false}
+        nodesDraggable={true}
+      >
+        <Controls style={{ color: '#FFF' }} />
+      </ReactFlow>
     </div>
   );
 };

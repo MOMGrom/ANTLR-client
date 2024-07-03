@@ -31,10 +31,10 @@ const CodeInput = (props) => {
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
           enableSnippets: true,
-          fontSize: 25,
+          fontSize: 18,
         }}
         height="700px"  
-        width="1200px"
+        width="1500px"
       />
       <button className={styles.button} onClick={handleClick}>Анализировать</button>
     </div>
