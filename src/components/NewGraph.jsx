@@ -69,7 +69,7 @@ const NewGraph = (props) => {
   );
 
   return (
-    <div style={{ width: '100%', height: '100vh', backgroundColor: '#282c34' }}>
+    <div style={{ width: '100%', height: '96.3vh', backgroundColor: '#282c34' }}>
       <ReactFlow
         nodes={layoutedNodes}
         edges={layoutedEdges}

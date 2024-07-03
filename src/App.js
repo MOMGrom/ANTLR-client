@@ -50,7 +50,6 @@ function App() {
       <CodeInput AnlzBtnClick={AnlzBtnClick}/>
 
       {graph ? <div style={{
-        backgroundColor: "white",
         height: "100vh",
         width: "90%",
         margin: "auto",
@@ -72,7 +71,6 @@ function App() {
           display: "inline-block",
           height: "100%",
           width: "50%",
-          backgroundColor: "violet",
           verticalAlign: "top"
         }}>
           <button className="button" onClick={() => setChangeGraph(!changeGraph)}>Отображение</button>

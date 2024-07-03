@@ -52,6 +52,7 @@ const Graph = (props) => {
     data: { label: node.Id },
     position: { x: 0, y: 0 },
     style: nodeStyles,
+    draggable: true,
   }));
 
   const edges = props.Graph.Edges.map((edge) => ({
@@ -69,7 +70,7 @@ const Graph = (props) => {
   );
 
   return (
-    <div style={{ width: '100%', height: '100vh', backgroundColor: '#282c34' }}>
+    <div style={{ width: '100%', height: '92vh', backgroundColor: '#282c34' }}>
       <ReactFlow
         nodes={layoutedNodes}
         edges={layoutedEdges}
