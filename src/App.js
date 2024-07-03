@@ -63,7 +63,6 @@ function App() {
           display: "inline-block",
           height: "100%",
           width: "50%",
-          backgroundColor: "pink"
         }}>
           <NodedCode Code={graph.NodedCode}/>
         </div>
