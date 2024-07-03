@@ -7,7 +7,7 @@ import dagre from 'dagre';
 const getLayoutedElements = (nodes, edges) => {
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
-  dagreGraph.setGraph({ rankdir: 'TB' });
+  dagreGraph.setGraph({ rankdir: 'TB', ranksep: 100, nodesep: 50 });
 
   nodes.forEach((node) => {
     dagreGraph.setNode(node.id, { width: 172, height: 36 });
@@ -46,10 +46,10 @@ const edgeStyles = {
   strokeWidth: 2,
 };
 
-const Graph = (props) => {
+const NewGraph = (props) => {
   const nodes = props.Graph.Nodes.map((node) => ({
     id: node.Id.toString(),
-    data: { label: node.Id },
+    data: { label: node.Code },
     position: { x: 0, y: 0 },
     style: nodeStyles,
   }));
@@ -84,4 +84,4 @@ const Graph = (props) => {
   );
 };
 
-export default Graph;
+export default NewGraph;

@@ -5,6 +5,7 @@ import CodeInput from './components/CodeInput';
 import Graph from './components/Graph';
 import Matrix from './components/Matrix';
 import NodedCode from './components/NodedCode';
+import NewGraph from './components/NewGraph';
 
 
 
@@ -12,6 +13,7 @@ function App() {
   
   const [graph, setGraph] = useState(null);
   const [matrix, setMatrix] = useState(null);
+  const [changeGraph, setChangeGraph] = useState(true);
 
   function multyToSingleLine(multyline) {
       let singleline = multyline;
@@ -73,7 +75,8 @@ function App() {
           backgroundColor: "violet",
           verticalAlign: "top"
         }}>
-          <Graph Graph={graph}/>
+          <button className="button" onClick={() => setChangeGraph(!changeGraph)}>Отображение</button>
+          {changeGraph ? <Graph Graph={graph}/> : <NewGraph Graph={graph}/>}
         </div>
       </div> : <></>}
       {graph ? <Matrix Matrix={graph.Matrix}/> : <></>}
