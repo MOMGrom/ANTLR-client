@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import ReactFlow, { Controls, Background, MiniMap, Handle } from 'reactflow';
 import 'reactflow/dist/style.css';
 import dagre from 'dagre';
@@ -47,12 +47,12 @@ const edgeStyles = {
 };
 
 const Graph = (props) => {
-  const nodes = props.Graph.Nodes.map((node) => ({
+  const [nodes, setNodes] = useState(props.Graph.Nodes.map((node) => ({
     id: node.Id.toString(),
     data: { label: node.Id },
     position: { x: 0, y: 0 },
     style: nodeStyles,
-  }));
+  })));
 
   const edges = props.Graph.Edges.map((edge) => ({
     id: `${edge.sourceId}-${edge.targetId}`,
@@ -68,6 +68,15 @@ const Graph = (props) => {
     [nodes, edges]
   );
 
+  const onNodesChange = useCallback((changes) => {
+    setNodes((nds) =>
+      nds.map((node) => {
+        const change = changes.find((c) => c.id === node.id);
+        return change ? { ...node, ...change } : node;
+      })
+    );
+  }, []);
+
   return (
     <div style={{ width: '100%', height: '100vh', backgroundColor: '#282c34' }}>
       <ReactFlow
@@ -76,9 +85,10 @@ const Graph = (props) => {
         fitView
         nodesConnectable={false}
         nodesDraggable={true}
+        onNodesChange={onNodesChange}
       >
         <Controls style={{ color: '#FFF' }} />
-        
+        <Background color="#888" gap={16} />
       </ReactFlow>
     </div>
   );
