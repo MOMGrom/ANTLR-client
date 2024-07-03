@@ -41,6 +41,8 @@ function App() {
     setGraph((JSON.parse(await getGraph(code))));
   }
 
+  console.log(graph)
+
   return (
     <div className="App">
       <CodeInput AnlzBtnClick={AnlzBtnClick}/>
@@ -50,7 +52,12 @@ function App() {
         height: "100vh",
         width: "90%",
         margin: "auto",
-        alignItems: "top"
+        alignItems: "top",
+
+        borderStyle: "solid",
+        borderColor: "rgba(65, 65, 65, 1.0)",
+        borderWidth: "2px",
+        borderRadius: "10px"
       }}>
         <div style={{
           display: "inline-block",
@@ -58,13 +65,7 @@ function App() {
           width: "50%",
           backgroundColor: "pink"
         }}>
-         <div style={{
-          backgroundColor: "blue",
-          height: "100%",
-          verticalAlign: "top"
-         }}>
-          <NodedCode Code={graph.Code}/>
-         </div>
+          <NodedCode Code={graph.NodedCode}/>
         </div>
         <div style={{
           display: "inline-block",

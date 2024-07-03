@@ -34,7 +34,7 @@ const CodeInput = (props) => {
           fontSize: 18,
         }}
         height="700px"  
-        width="1500px"
+        width="92%"
       />
       <button className={styles.button} onClick={handleClick}>Анализировать</button>
     </div>
