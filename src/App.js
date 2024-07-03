@@ -4,6 +4,7 @@ import './App.css';
 import CodeInput from './components/CodeInput';
 import Graph from './components/Graph';
 import Matrix from './components/Matrix';
+import NodedCode from './components/NodedCode';
 
 
 
@@ -43,7 +44,38 @@ function App() {
   return (
     <div className="App">
       <CodeInput AnlzBtnClick={AnlzBtnClick}/>
-      {graph ? <Graph Graph={graph}/> : <></>}
+
+      {graph ? <div style={{
+        backgroundColor: "white",
+        height: "100vh",
+        width: "90%",
+        margin: "auto",
+        alignItems: "top"
+      }}>
+        <div style={{
+          display: "inline-block",
+          height: "100%",
+          width: "50%",
+          backgroundColor: "pink"
+        }}>
+         <div style={{
+          backgroundColor: "blue",
+          height: "100%",
+          verticalAlign: "top"
+         }}>
+          <NodedCode Code={graph.Code}/>
+         </div>
+        </div>
+        <div style={{
+          display: "inline-block",
+          height: "100%",
+          width: "50%",
+          backgroundColor: "violet",
+          verticalAlign: "top"
+        }}>
+          <Graph Graph={graph}/>
+        </div>
+      </div> : <></>}
       {graph ? <Matrix Matrix={graph.Matrix}/> : <></>}
     </div>
   );
