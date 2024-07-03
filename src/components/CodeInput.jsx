@@ -11,9 +11,9 @@ const CodeInput = (props) => {
     setCode(newCode);
   };
 
-  function handleClick(event) {
+  async function handleClick(event) {
     event.preventDefault();
-    props.AnlzBtnClick(code);
+    await props.AnlzBtnClick(code);
   }
 
   return (

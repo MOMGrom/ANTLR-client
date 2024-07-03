@@ -1,0 +1,31 @@
+.main {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.title {
+    color: white;
+}
+
+.matrixArea {
+
+}
+
+.matrixString {
+
+}
+
+.matrixUnit {
+    display: inline-block;
+
+    color: white;
+
+    padding: auto;
+
+    width: 40px;
+    height: 40px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(50, 145, 174);
+}

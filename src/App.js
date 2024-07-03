@@ -9,8 +9,8 @@ import Matrix from './components/Matrix';
 
 function App() {
   
-  const {graph, setGraph} = useState(null);
-  const {matrix, setMatrix} = useState(null);
+  const [graph, setGraph] = useState(null);
+  const [matrix, setMatrix] = useState(null);
 
   function multyToSingleLine(multyline) {
       let singleline = multyline;
@@ -37,17 +37,14 @@ function App() {
   }
   
   async function AnlzBtnClick(code) {
-    setGraph(await getGraph(code));
+    setGraph((JSON.parse(await getGraph(code))));
   }
 
   return (
     <div className="App">
-      <Graph/>
-      {/* <CodeInput AnlzBtnClick={AnlzBtnClick}/>
-      {graph ? <Graph Graph={graph}/> : <></>} */}
-      {/* 
-      <Graph/>
-      {matrix ? <Matrix Matrix={matrix}/> : <></>} */}
+      <CodeInput AnlzBtnClick={AnlzBtnClick}/>
+      {graph ? <Graph Graph={graph}/> : <></>}
+      {graph ? <Matrix Matrix={graph.Matrix}/> : <></>}
     </div>
   );
 }

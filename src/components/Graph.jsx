@@ -56,13 +56,25 @@ const data = {
 };
 
 
-const Graph = () => {
+const Graph = (props) => {
   const fgRef = useRef();
+
+  let GraphData = {
+    nodes: [],
+    links: [],
+  };
+
+  props.Graph.Nodes.forEach((node, index) => {
+    GraphData.nodes.push({id: node.Id, title: node.Id, fx: 0, fy: 100 * index});
+  });
+
+  props.Graph.Edges.forEach((edge, index) => {
+    GraphData.links.push({source: edge.sourceId, target: edge.targetId});
+  });
 
   useEffect(() => {
     const fg = fgRef.current;
 
-   
     data.nodes.forEach((node, i) => {
       node.fx = 0; 
       node.fy = i * 100; 
@@ -76,7 +88,7 @@ const Graph = () => {
     <div>
     <ForceGraph2D
       ref={fgRef}
-      graphData={data}
+      graphData={GraphData}
       linkDirectionalArrowLength={10}
       linkDirectionalArrowRelPos={0.76}
       linkCurvature={link => {
